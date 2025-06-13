@@ -33,6 +33,9 @@ export type DecamelizeKeys<
 	Separator extends string = '_',
 	Exclude extends readonly unknown[] = EmptyTuple,
 	Deep extends boolean = false,
+	PreserveConsecutiveUppercase extends boolean = false,
+	ExcludeChildren extends readonly unknown[] = EmptyTuple,
+	Overrides extends ReadonlyArray<readonly [string | RegExp, string]> = EmptyTuple,
 > = T extends readonly any[]
 	// Handle arrays or tuples.
 	? {
@@ -44,7 +47,10 @@ export type DecamelizeKeys<
 				T[P],
 				Separator,
 				Exclude,
-				Deep
+				Deep,
+				PreserveConsecutiveUppercase,
+				ExcludeChildren,
+				Overrides
 				>
 			: T[P];
 	}
@@ -62,7 +68,10 @@ export type DecamelizeKeys<
 					T[P],
 					Separator,
 					Exclude,
-					Deep
+					Deep,
+					PreserveConsecutiveUppercase,
+					ExcludeChildren,
+					Overrides
 					>
 					: T[P];
 		}
@@ -208,5 +217,8 @@ export default function decamelizeKeys<
 T,
 Separator,
 WithDefault<OptionsType['exclude'], EmptyTuple>,
-WithDefault<OptionsType['deep'], false>
+WithDefault<OptionsType['deep'], false>,
+WithDefault<OptionsType['preserveConsecutiveUppercase'], false>,
+WithDefault<OptionsType['excludeChildren'], EmptyTuple>,
+WithDefault<OptionsType['overrides'], EmptyTuple>
 >;
