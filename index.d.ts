@@ -100,6 +100,38 @@ type Options<Separator> = {
 	readonly exclude?: ReadonlyArray<string | RegExp>;
 
 	/**
+	 * Exclude children of the given keys from being decamelized.
+	 * @default []
+	 * @example
+	 * ```
+	 * decamelizeKeys({
+	 * 		aB: 1,
+	 *		aC: {
+	 *			cD: 1,
+	 *			cE: {
+	 *				eF: 1
+	 *			}
+	 *		}
+	 *	}, {
+	 *    deep: true,
+	 *    excludeChildren: [
+	 *    	'aC'
+	 *    ]
+	 * })
+	 *
+	 * // {
+	 * // 	a_b: 1,
+	 * // 	a_c: {
+	 * // 		cD: 1,
+	 * // 		cE: {
+	 * // 			e_f: 1
+	 * // 		}
+	 * // 	}
+	 * // }
+	 */
+	readonly excludeChildren?: ReadonlyArray<string | RegExp>;
+
+	/**
 	Recurse nested objects and objects in arrays.
 
 	@default false
@@ -113,6 +145,24 @@ type Options<Separator> = {
 	```
 	*/
 	readonly deep?: boolean;
+
+	/**
+	 * A list of matching keys that will be manually overridden with the provided value.
+	 * @default []
+	 * @example
+	 * ```
+	 * decamelizeKeys(
+	 * 	 {fooBar: true, nested: {unicornRainbow: true}},
+	 * 	 {
+	 * 	   overrides: [
+	 * 		   ['fooBar', 'foo_baz'],
+	 * 		 ]
+	 * 	 }
+	 * )
+	 *
+	 * //=> {'foo_baz': true, nested: {'unicorn_rainbow': true}}
+	 */
+	readonly overrides?: ReadonlyArray<[string | RegExp, string]>;
 };
 
 /**
