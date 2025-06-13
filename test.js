@@ -10,6 +10,22 @@ test('separator option', t => {
 	t.deepEqual(Object.keys(decamelizeKeys({fooBar: true}, {separator: '-'})), ['foo-bar']);
 });
 
+test('preserve consecutive uppercase option', t => {
+	t.true(decamelizeKeys({testGUILabel: true}, {preserveConsecutiveUppercase: true}).test_GUI_label);
+	t.true(decamelizeKeys({testGUILabel: true}, {preserveConsecutiveUppercase: false}).test_gui_label);
+});
+
+test('separator and preserve consecutive uppercase', t => {
+	t.true(decamelizeKeys({testGUILabel: true}, {separator: '-', preserveConsecutiveUppercase: true})['test-GUI-label']);
+});
+
+test('separator, preserve consecutive uppercase and deep options', t => {
+	t.deepEqual(
+		decamelizeKeys({fooBar: 1, nested: {testGUILabel: true}}, {deep: true, separator: '-', preserveConsecutiveUppercase: true}),
+		{'foo-bar': 1, nested: {'test-GUI-label': true}}
+	);
+});
+
 test('exclude option', t => {
 	t.deepEqual(Object.keys(decamelizeKeys({'--': true}, {exclude: ['--']})), ['--']);
 	t.deepEqual(Object.keys(decamelizeKeys({fooBar: true}, {exclude: [/^f/]})), ['fooBar']);

@@ -88,6 +88,23 @@ decamelizeKeys({fooBar: true, nested: {unicornRainbow: true}}, {deep: true});
 //=> {foo_bar: true, nested: {unicorn_rainbow: true}}
 ```
 
+##### preserveConsecutiveUppercase
+
+Type: `boolean`\
+Default: `false`
+
+Preserve sequences of uppercase characters.
+
+```js
+const decamelize = require('decamelize');
+
+decamelize('testGUILabel');
+//=> 'test_gui_label'
+
+decamelize('testGUILabel', {preserveConsecutiveUppercase: true});
+//=> 'test_GUI_label'
+```
+
 ## Related
 
 - [camelcase-keys](https://github.com/sindresorhus/camelcase-keys) - The inverse of this package.

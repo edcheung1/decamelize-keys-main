@@ -91,6 +91,20 @@ type Options<Separator> = {
 	readonly separator?: Separator;
 
 	/**
+		Preserve sequences of uppercase characters.
+		@default false
+		@example
+		```
+		import decamelize = require('decamelize');
+		decamelize('testGUILabel');
+		//=> 'test_gui_label'
+		decamelize('testGUILabel', {preserveConsecutiveUppercase: true});
+		//=> 'test_GUI_label'
+		```
+	 */
+	readonly preserveConsecutiveUppercase?: boolean;
+
+	/**
 	Exclude keys from being camel-cased.
 
 	If this option can be statically determined, it's recommended to add `as const` to it.

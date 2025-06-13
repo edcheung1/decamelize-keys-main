@@ -32,6 +32,7 @@ const transform = (input, options = {}) => {
 		exclude,
 		excludeChildren,
 		deep = false,
+		preserveConsecutiveUppercase = false,
 		overrides,
 	} = options;
 
@@ -54,11 +55,11 @@ const transform = (input, options = {}) => {
 			return [key, value];
 		}
 
-		const cacheKey = `${separator}${key}`;
+		const cacheKey = `${separator}${key}${preserveConsecutiveUppercase ? 1 : 0}`;
 		if (cache.has(cacheKey)) {
 			key = cache.get(cacheKey);
 		} else {
-			const returnValue = decamelize(key, {separator});
+			const returnValue = decamelize(key, {separator, preserveConsecutiveUppercase});
 
 			if (key.length < 100) { // Prevent abuse
 				cache.set(cacheKey, returnValue);
