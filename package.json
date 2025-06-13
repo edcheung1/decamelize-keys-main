@@ -1,6 +1,6 @@
 {
 	"name": "decamelize-keys",
-	"version": "2.2.0",
+	"version": "3.0.0",
 	"description": "Convert object keys from camel case",
 	"license": "MIT",
 	"repository": "sindresorhus/decamelize-keys",
@@ -17,7 +17,7 @@
 	},
 	"sideEffects": false,
 	"engines": {
-		"node": ">=14.16"
+		"node": ">=16"
 	},
 	"scripts": {
 		"test": "xo && ava && tsd"
@@ -55,6 +55,6 @@
 	"devDependencies": {
 		"ava": "^5.0.1",
 		"tsd": "^0.24.1",
-		"xo": "^0.59.3"
+		"xo": "^0.56.0"
 	}
 }
