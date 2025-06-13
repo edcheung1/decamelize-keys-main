@@ -43,8 +43,8 @@ const transform = (input, options = {}) => {
 		}
 
 		if (
-			(excludeChildren && has(excludeChildren, parentPath?.split('.').pop())) ||
-			(exclude && has(exclude, key))
+			(excludeChildren && has(excludeChildren, parentPath?.split('.').pop()))
+			|| (exclude && has(exclude, key))
 		) {
 			return [key, value];
 		}

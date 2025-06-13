@@ -22,7 +22,7 @@ test('separator and preserve consecutive uppercase', t => {
 test('separator, preserve consecutive uppercase and deep options', t => {
 	t.deepEqual(
 		decamelizeKeys({fooBar: 1, nested: {testGUILabel: true}}, {deep: true, separator: '-', preserveConsecutiveUppercase: true}),
-		{'foo-bar': 1, nested: {'test-GUI-label': true}}
+		{'foo-bar': 1, nested: {'test-GUI-label': true}},
 	);
 });
 
@@ -42,14 +42,14 @@ test('excludeChildren option', t => {
 						eF: 1,
 						gH: 1,
 						hI: {
-							jK: 1
-						}
-					}
-				}
+							jK: 1,
+						},
+					},
+				},
 			}
 			, {deep: true, excludeChildren: ['cE']}),
 		// eslint-disable-next-line camelcase
-		{a_b: 1, a_c: {c_d: 1, c_e: {eF: 1, gH: 1, hI: {j_k: 1}}}}
+		{a_b: 1, a_c: {c_d: 1, c_e: {eF: 1, gH: 1, hI: {j_k: 1}}}},
 	);
 });
 
@@ -57,19 +57,19 @@ test('overrides option', t => {
 	t.deepEqual(
 		decamelizeKeys({fooBar: true, obj: {oneTwo: false, arr: [{threeFour: true}]}}, {deep: true, overrides: [['fooBar', 'fooBarOverride']]}),
 		// eslint-disable-next-line camelcase
-		{fooBarOverride: true, obj: {one_two: false, arr: [{three_four: true}]}}
+		{fooBarOverride: true, obj: {one_two: false, arr: [{three_four: true}]}},
 	);
 
 	t.deepEqual(
 		decamelizeKeys({fooBar: true, obj: {oneTwo: false, arr: [{nestedKey: true}]}}, {deep: true, overrides: [['fooBar', 'fooBarOverride'], ['nestedKey', 'nestedKeyOverride']]}),
 		// eslint-disable-next-line camelcase
-		{fooBarOverride: true, obj: {one_two: false, arr: [{nestedKeyOverride: true}]}}
+		{fooBarOverride: true, obj: {one_two: false, arr: [{nestedKeyOverride: true}]}},
 	);
 
 	t.deepEqual(
 		decamelizeKeys({someRegexMatchKey: true, obj: {oneTwo: false, arr: [{threeFour: true}]}}, {deep: true, overrides: [[/RegexMatch/, 'regexOverride']]}),
 		// eslint-disable-next-line camelcase
-		{regexOverride: true, obj: {one_two: false, arr: [{three_four: true}]}}
+		{regexOverride: true, obj: {one_two: false, arr: [{three_four: true}]}},
 	);
 });
 
